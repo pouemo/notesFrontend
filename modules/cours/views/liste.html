@@ -1,0 +1,27 @@
+<div>
+    <h4 class="titre">LA LISTE DES COURS</h4>
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr class="success">
+                <th>Numero</th>
+<!--                <th>Credit</th>-->
+                <th>Intitule</th>
+                <th>Type de cours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(cle,cour) in cours | orderBy : 'intitule'| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage" class="inverse">
+                <td>{{(currentPage - 1) * itemsPerPage + $index + 1}}</td>
+<!--                <td>{{cour.credit}}</td>-->
+                <td>{{cour.intitule}}</td>
+                <td>{{cour.typeCours.nom}}</td>
+                <td><a ng-click="afficherFenetre(cle,cour)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerCours(cle,cour)"> <i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination  boundary-links="true" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <form>
+        <button class="btn btn-primary" ng-click="afficherFenetre()"><i class="glyphicon glyphicon-save"></i>Ajouter un Cours</button>
+    </form>
+</div>
